@@ -19,7 +19,7 @@ export default function Fleet() {
       <PageHero
         title="Our Fleet"
         subtitle="Modern, well maintained vehicles for every kind of journey."
-        image="../src/assets/images/bus4.jpeg"
+        image="/images/bus4.jpeg"
       />
 
       <section className="py-20 bg-surface dark:bg-dark">

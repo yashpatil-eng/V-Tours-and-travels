@@ -38,7 +38,7 @@ export default function Home() {
         className="relative min-h-screen flex items-center bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('./src/assets/images/car2.jpeg')",
+            "url('/images/car2.jpeg')",
         }}
       >
         <div className="absolute inset-0 bg-hero-gradient" />
@@ -117,7 +117,7 @@ export default function Home() {
             className="relative"
           >
             <img
-              src="./src/assets/images/car1.jpeg"
+              src=".jpeg"
               alt="Vrunda Tours fleet vehicle"
               loading="lazy"
               className="rounded-2xl shadow-card-hover w-full h-[420px] object-cover"
