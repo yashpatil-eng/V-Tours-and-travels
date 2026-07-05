@@ -15,7 +15,7 @@ export default function Gallery() {
       <PageHero
         title="Gallery"
         subtitle="A glimpse into the journeys we've been part of."
-        image="https://images.unsplash.com/photo-1528543606781-2f6e6857f318?q=80&w=1600&auto=format&fit=crop"
+        image="./src/assets/images/car1.jpeg"
       />
 
       <section className="py-20 bg-white dark:bg-white/5">

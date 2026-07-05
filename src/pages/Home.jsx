@@ -38,7 +38,7 @@ export default function Home() {
         className="relative min-h-screen flex items-center bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=1920&auto=format&fit=crop')",
+            "url('./src/assets/images/car2.jpeg')",
         }}
       >
         <div className="absolute inset-0 bg-hero-gradient" />
@@ -117,7 +117,7 @@ export default function Home() {
             className="relative"
           >
             <img
-              src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=1000&auto=format&fit=crop"
+              src="./src/assets/images/car1.jpeg"
               alt="Vrunda Tours fleet vehicle"
               loading="lazy"
               className="rounded-2xl shadow-card-hover w-full h-[420px] object-cover"

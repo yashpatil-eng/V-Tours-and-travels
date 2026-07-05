@@ -3,6 +3,7 @@ import emailjs from '@emailjs/browser';
 import { motion } from 'framer-motion';
 import { FiSend } from 'react-icons/fi';
 import { EMAILJS_CONFIG, FLEET, CALL_LINK, WHATSAPP_LINK } from '../constants/config';
+import { addBooking } from '../services/bookings';
 import Toast from './Toast';
 
 const INITIAL_FORM = {
@@ -63,11 +64,35 @@ export default function BookingForm({ presetVehicle }) {
         !EMAILJS_CONFIG.templateId.includes('your') &&
         !EMAILJS_CONFIG.publicKey.includes('your');
 
+      let bookingId = null;
+      // Save booking to Firestore if Firebase is configured
+      const firebaseConfigured = import.meta.env.VITE_FIREBASE_PROJECT_ID;
+      if (firebaseConfigured) {
+        try {
+          const res = await addBooking({
+            name: form.name,
+            phone: form.phone,
+            email: form.email,
+            pickup: form.pickup,
+            drop: form.drop,
+            journey_date: form.journeyDate,
+            return_date: form.returnDate,
+            vehicle: form.vehicle,
+            passengers: form.passengers,
+            message: form.message,
+          });
+          bookingId = res.booking_id;
+        } catch (err) {
+          console.error('Failed to save booking to Firestore', err);
+        }
+      }
+
       if (configured) {
         await emailjs.send(
           EMAILJS_CONFIG.serviceId,
           EMAILJS_CONFIG.templateId,
           {
+            name: form.name,
             from_name: form.name,
             phone: form.phone,
             email: form.email,
@@ -78,6 +103,8 @@ export default function BookingForm({ presetVehicle }) {
             vehicle: form.vehicle,
             passengers: form.passengers,
             message: form.message,
+            booking_id: bookingId,
+            status: 'Pending',
           },
           EMAILJS_CONFIG.publicKey
         );

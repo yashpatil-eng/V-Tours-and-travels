@@ -24,7 +24,7 @@ export default function NotFound() {
             Looks Like You&apos;ve Taken a Wrong Turn
           </h1>
           <p className="text-dark/60 dark:text-white/60 mb-8">
-            The page you're looking for doesn't exist. Let's get you back on the road.
+            The page you&apos;re looking for doesn&apos;t exist. Let&apos;s get you back on the road.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link to="/" className="btn-primary"><FiHome /> Back to Home</Link>

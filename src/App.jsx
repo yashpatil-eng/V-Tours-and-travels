@@ -15,6 +15,8 @@ const Contact = lazy(() => import('./pages/Contact'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const AdminLogin = lazy(() => import('./pages/AdminLogin'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 
 export default function App() {
   const [isDark, setIsDark] = useDarkMode();
@@ -42,6 +44,8 @@ export default function App() {
             <Route path="/privacy-policy" element={<Privacy />} />
             <Route path="/terms-and-conditions" element={<Terms />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
           </Route>
         </Routes>
       </Suspense>
