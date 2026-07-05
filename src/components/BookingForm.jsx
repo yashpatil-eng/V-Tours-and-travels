@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import emailjs from '@emailjs/browser';
 import { motion } from 'framer-motion';
 import { FiSend } from 'react-icons/fi';
-import { EMAILJS_CONFIG, FLEET, CALL_LINK, WHATSAPP_LINK } from '../constants/config';
+import { FLEET, CALL_LINK, WHATSAPP_LINK } from '../constants/config';
 import { addBooking } from '../services/bookings';
 import Toast from './Toast';
+import { isEmailConfigured, sendEmail } from '../services/emailService';
 
 const INITIAL_FORM = {
   name: '',
@@ -56,13 +56,7 @@ export default function BookingForm({ presetVehicle }) {
     setSubmitting(true);
 
     try {
-      const configured =
-        EMAILJS_CONFIG.serviceId &&
-        EMAILJS_CONFIG.templateId &&
-        EMAILJS_CONFIG.publicKey &&
-        !EMAILJS_CONFIG.serviceId.includes('your') &&
-        !EMAILJS_CONFIG.templateId.includes('your') &&
-        !EMAILJS_CONFIG.publicKey.includes('your');
+      const configured = isEmailConfigured();
 
       let bookingId = null;
       // Save booking to Firestore if Firebase is configured
@@ -88,10 +82,8 @@ export default function BookingForm({ presetVehicle }) {
       }
 
       if (configured) {
-        await emailjs.send(
-          EMAILJS_CONFIG.serviceId,
-          EMAILJS_CONFIG.templateId,
-          {
+        try {
+          await sendEmail(null, {
             name: form.name,
             from_name: form.name,
             phone: form.phone,
@@ -105,13 +97,14 @@ export default function BookingForm({ presetVehicle }) {
             message: form.message,
             booking_id: bookingId,
             status: 'Pending',
-          },
-          EMAILJS_CONFIG.publicKey
-        );
-        setToast({ type: 'success', message: 'Booking request sent! We will contact you shortly.' });
+          });
+          setToast({ type: 'success', message: 'Booking request sent! We will contact you shortly.' });
+        } catch (sendErr) {
+          console.error('EmailJS send failed', sendErr);
+          setToast({ type: 'error', message: 'Failed to send booking email — please call or WhatsApp us.' });
+        }
       } else {
-        // EmailJS not configured (placeholder values detected) — simulate success for dev,
-        // but show a helpful message prompting users to call or WhatsApp.
+        // EmailJS not configured — behave gracefully but notify
         await new Promise((resolve) => setTimeout(resolve, 800));
         setToast({
           type: 'success',
@@ -120,8 +113,8 @@ export default function BookingForm({ presetVehicle }) {
       }
       setForm(INITIAL_FORM);
     } catch (err) {
-      console.error('EmailJS send error:', err);
-      setToast({ type: 'error', message: 'Something went wrong sending email. Please call or WhatsApp us directly.' });
+      console.error('Booking submit error:', err);
+      setToast({ type: 'error', message: 'Something went wrong. Please try again or contact us directly.' });
     } finally {
       setSubmitting(false);
     }
