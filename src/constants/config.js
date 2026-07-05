@@ -18,9 +18,10 @@ export const BUSINESS = {
   email: 'deepakpatil78367@gmail.com',
   whatsappNumber: '918693035814',
   whatsappMessage: 'Hello Vrunda Tours and Travels, I would like to book a vehicle.',
-  address: 'Maharashtra, India',
+  address: 'Dombivali, Mumbai, Maharashtra, India',
   mapEmbedUrl:
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59978.02!2d73.7898!3d19.9975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDU5JzUxLjAiTiA3M8KwNDcnMjMuMyJF!5e0!3m2!1sen!2sin!4v1700000000000',
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60293.57873861978!2d73.0949!3d19.2138!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c8c9e0f8b5a7%3A0x8b6b9b5f3b6a4c6f!2sDombivli%2C%20Maharashtra%2C%20India!5e0!3m2!1sen!2sin!4v1700000000000',
+  ownerPhoto: '/images/owner-placeholder.jpg',
   yearFounded: 2012,
   socials: {
     facebook: 'https://facebook.com',

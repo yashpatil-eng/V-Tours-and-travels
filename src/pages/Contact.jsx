@@ -51,18 +51,30 @@ export default function Contact() {
                 <div key={item.label}>{content}</div>
               );
             })}
+            <div className="rounded-2xl overflow-hidden shadow-card p-5 bg-surface dark:bg-white/5">
+              <div className="flex items-center gap-4">
+                <img src={BUSINESS.ownerPhoto} alt={`${BUSINESS.ownerName} photo`} className="w-20 h-20 rounded-full object-cover" />
+                <div>
+                  <p className="text-xs uppercase tracking-wide text-dark/50 dark:text-white/50 mb-0.5">Business Owner</p>
+                  <p className="font-medium text-dark dark:text-white">{BUSINESS.ownerName} ({BUSINESS.alsoKnownAs})</p>
+                  <p className="text-sm text-dark/60 dark:text-white/60">{BUSINESS.address}</p>
+                </div>
+              </div>
 
-            <div className="rounded-2xl overflow-hidden shadow-card h-64">
-              <iframe
-                title="Vrunda Tours & Travels location map"
-                src={BUSINESS.mapEmbedUrl}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+              <p className="mt-4 text-sm text-dark/70 dark:text-white/60">This owner directly owns one vehicle; other vehicles listed belong to partner operators associated with this business and receive bookings through owner connections.</p>
+
+              <div className="mt-4 rounded-lg overflow-hidden h-40">
+                <iframe
+                  title="Vrunda Tours & Travels location map"
+                  src={BUSINESS.mapEmbedUrl}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
             </div>
           </div>
 
